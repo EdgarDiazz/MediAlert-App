@@ -39,7 +39,7 @@ class HistoryScreen extends StatelessWidget {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      backgroundColor: const Color(0xFFF5F9FF), // Fondo muy claro azul-gris
+      backgroundColor: const Color(0xFFF5F9FF), 
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestoreService.obtenerMedicamentos(userId),
         builder: (context, snapshot) {

@@ -2,10 +2,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
+/// Servicio para manejar notificaciones programadas en la app
 class NotificacionesServicio {
   static final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
+  /// Inicializa el servicio de notificaciones
   static Future<void> inicializar() async {
     const AndroidInitializationSettings androidInit =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -62,14 +64,14 @@ class NotificacionesServicio {
           priority: Priority.high,
         ),
       ),
-      androidAllowWhileIdle: true,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle, // ✅ actualizado
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.wallClockTime,
     );
   }
 
-  ///  Notificación única (para pruebas inmediatas)
+  /// 💡 Notificación única (para pruebas inmediatas)
   static Future<void> programarNotificacionUnica({
     required int id,
     required String titulo,
@@ -93,12 +95,13 @@ class NotificacionesServicio {
           priority: Priority.high,
         ),
       ),
-      androidAllowWhileIdle: true,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle, // ✅ actualizado
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.wallClockTime,
     );
   }
 
+  /// Convierte un enum Day a número de día de la semana (1=Lunes, ..., 7=Domingo)
   static int _dayToWeekday(Day day) {
     switch (day) {
       case Day.monday:

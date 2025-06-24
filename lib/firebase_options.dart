@@ -77,4 +77,5 @@ class DefaultFirebaseOptions {
     authDomain: 'medialertapp-a9560.firebaseapp.com',
     storageBucket: 'medialertapp-a9560.firebasestorage.app',
   );
+
 }

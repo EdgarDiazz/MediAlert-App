@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../utils/fake_database.dart';
-import '../models/medicamento.dart';
+//import '../models/medicamento.dart';
 
 /// Pantalla que muestra un resumen del usuario: estado de desempeño y medicamentos eliminados
 class UserSummaryScreen extends StatelessWidget {

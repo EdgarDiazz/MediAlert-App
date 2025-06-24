@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../servicios/servicio_auth.dart';
 import 'main_screen.dart';
-import 'login_screen.dart';
+//import 'login_screen.dart';
 
 /// Pantalla de registro para nuevos usuarios
 class RegisterScreen extends StatefulWidget {
@@ -31,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           _passwordController.text.trim(),
         );
 
-        if (user != null) {
+        if (user != null && mounted) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -40,9 +40,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           );
         }
       } on FirebaseAuthException catch (e) {
-        setState(() {
-          _error = e.message ?? 'Error al registrarse';
-        });
+        if (mounted) {
+          setState(() {
+            _error = e.message ?? 'Error al registrarse';
+          });
+        }
       }
     }
   }
@@ -50,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0FAF8), 
+      backgroundColor: const Color(0xFFF0FAF8),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24),
@@ -86,7 +88,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    // Campo de correo
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -105,7 +106,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 16),
 
-                    // Campo de contraseña
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
@@ -124,7 +124,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Botón de registro
                     ElevatedButton.icon(
                       onPressed: _register,
                       icon: const Icon(Icons.check),
@@ -143,7 +142,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
 
-                    // Mensaje de error
                     if (_error.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0),
@@ -158,7 +156,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     const SizedBox(height: 16),
 
-                    // Botón para volver al login
                     TextButton.icon(
                       onPressed: () {
                         Navigator.pop(context);

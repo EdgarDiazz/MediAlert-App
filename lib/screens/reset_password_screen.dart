@@ -13,8 +13,8 @@ class ResetPasswordScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFF0FAF8), 
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Row(
-          children: const [
+        title: const Row(
+          children:  [
             Icon(Icons.lock_reset),
             SizedBox(width: 8),
             Text('Recuperar Contraseña'),

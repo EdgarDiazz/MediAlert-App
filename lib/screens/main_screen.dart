@@ -50,50 +50,84 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color azulPrincipal = Color.fromARGB(255, 1, 215, 253);
-    const Color fondoClaro = Color(0xFFF5F5F5);
+    const Color primaryColor = Color(0xFF4A90E2);
+    const Color backgroundColor = Color(0xFFF8FBFF);
 
     return Scaffold(
-      backgroundColor: fondoClaro,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text(
-          '🩺 MediAlert',
-          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.15),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.medication_rounded, color: Colors.white, size: 24),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              'MediAlert',
+              style: GoogleFonts.montserrat(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ],
         ),
         centerTitle: true,
-        backgroundColor: azulPrincipal,
+        backgroundColor: primaryColor,
+        elevation: 2,
+        toolbarHeight: 60,
         actions: [
           IconButton(
             onPressed: _logout,
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Colors.white),
             tooltip: 'Cerrar sesión',
           ),
         ],
       ),
       body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: azulPrincipal,
-        unselectedItemColor: Colors.grey[600],
-        selectedLabelStyle: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w600),
-        unselectedLabelStyle: GoogleFonts.montserrat(fontSize: 12),
-        backgroundColor: Colors.white,
-        iconSize: 28,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.medical_services),
-            label: 'Medicamentos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'Historial',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 8,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          selectedItemColor: primaryColor,
+          unselectedItemColor: Colors.grey[600],
+          selectedLabelStyle: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w600),
+          unselectedLabelStyle: GoogleFonts.montserrat(fontSize: 12),
+          backgroundColor: Colors.white,
+          iconSize: 28,
+          elevation: 0,
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.medical_services),
+              label: 'Medicamentos',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'Historial',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Perfil',
+            ),
+          ],
+        ),
       ),
     );
   }
